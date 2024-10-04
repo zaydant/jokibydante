@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,4 +28,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.poppins {
+  font-family: var(--font-poppins);
 }
