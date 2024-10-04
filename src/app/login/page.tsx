@@ -4,32 +4,40 @@ import React, { useState } from "react";
 import { LockOutlined, EmailOutlined } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "../store/authStore";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Snackbar, Alert } from "@mui/material";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false); // Snackbar open state
   const login = useAuthStore((state) => state.login);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSnackbarOpen(false); // Close Snackbar before new attempt
+
     try {
       setLoading(true);
       await login(email, password);
-      router.push("/admin"); // Redirect to home page after successful login
+      router.push("/admin"); // Redirect to admin page after successful login
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message);
+        setError(error.message); // Set error message
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
+      setSnackbarOpen(true); // Open Snackbar for error messages
     } finally {
       setLoading(false); // Reset loading state after process is done
     }
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false); // Close Snackbar
   };
 
   return (
@@ -38,7 +46,7 @@ export default function LoginPage() {
         <h1 className="text-2xl font-bold mb-6 text-center text-white">
           Login
         </h1>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -60,6 +68,7 @@ export default function LoginPage() {
               />
             </div>
           </div>
+
           <div className="mb-6">
             <label className="block text-sm font-bold mb-2" htmlFor="password">
               Password
@@ -77,6 +86,7 @@ export default function LoginPage() {
               />
             </div>
           </div>
+
           <button
             className={`w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 ${
               loading ? "opacity-50 cursor-not-allowed" : ""
@@ -84,10 +94,26 @@ export default function LoginPage() {
             type="submit"
             disabled={loading}
           >
-            {loading ? (<CircularProgress size={24} className="text-white" />) : ("Sign In")}
+            {loading ? (
+              <CircularProgress size={24} className="text-white" />
+            ) : (
+              "Sign In"
+            )}
           </button>
         </form>
       </div>
+
+      {/* Snackbar for error display */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000} // Snackbar will close after 6 seconds
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }} // Position of Snackbar
+      >
+        <Alert onClose={handleSnackbarClose} severity="error" variant="filled">
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

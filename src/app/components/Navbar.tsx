@@ -10,7 +10,7 @@ function NavBar() {
       <div
       className="h-[77px] w-full px-12 flex items-center justify-center"
     >
-      <div className="w-full flex justify-between items-center">
+      <div className="w-2/3 flex justify-between items-center">
         <Menu />
         <SearchAndLogin />
       </div>

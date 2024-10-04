@@ -31,22 +31,33 @@ export const useAuthStore = create<AuthState>()(
             },
             body: JSON.stringify({ email, password }),
           });
-          
+
+          // Handle specific error codes
+          if (response.status === 404) {
+            throw new Error('User not found');
+          }
+
+          if (response.status === 400) {
+            throw new Error('Invalid credentials');
+          }
+
           if (!response.ok) {
             throw new Error('Login failed');
           }
-          
+
           const { message, data } = await response.json();
+
+          // Success handling
           if (message === "Logged in successfully") {
-            set({ 
+            set({
               user: {
                 uid: data.uid,
                 email: data.email,
                 username: data.username,
-                role: data.role
+                role: data.role,
               },
               token: data.token,
-              isAuthenticated: true 
+              isAuthenticated: true,
             });
           } else {
             throw new Error('Unexpected response from server');

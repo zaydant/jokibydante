@@ -29,8 +29,8 @@ export default function Hero() {
   };
 
   return (
-    <section className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center min-h-screen">
-      <div className="w-full md:w-1/2 md:pr-8 mb-8 md:mb-0">
+    <section className="container mx-auto p-12 flex flex-col md:flex-row items-center min-h-screen">
+      <div className="w-full md:w-2/3 md:pr-8 mb-8 md:mb-0">
         <h1 className="text-5xl font-bold mb-4 text-black">Boost Smarter, Manage Faster</h1>
         <p className="text-gray-600 mb-6 text-xl">
           Power your Mobile Legends boosting service with our all-in-one management mobile app!
@@ -42,7 +42,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="w-full md:w-1/2 flex justify-center items-center">
+      <div className="w-full md:w-1/3 flex justify-center items-center">
         <div className="rounded-xl overflow-hidden mb-4 md:mb-0 w-[270px] h-[600px]">
           <Carousel {...carouselSettings}>
             {['/hero/ss1.png', '/hero/ss2.png', '/hero/ss3.png'].map((src, index) => (
