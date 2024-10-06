@@ -11,7 +11,7 @@ import { HomeIcon, SearchIcon, MenuIcon } from "lucide-react"
 export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b">
-      <div className="container mx-auto w-2/3 px-4 h-16 flex items-center justify-between">
+      <div className="container mx-auto w-full md:w-2/3 px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Image src="/logo_circle.png" height={40} width={40} alt="Logo" />
           <nav className="hidden md:flex items-center gap-6">

@@ -25,6 +25,7 @@ export default function Invoices() {
         <div className="w-2/3">
           <h1 className="text-4xl font-bold mb-4 mt-12 text-black">Find Your Order!</h1>
           <p className="mb-4 text-black">Find your order by entering your invoice number below:</p>
+          <p className="mb-4 text-black">Enter this id for example: JDTbvae_ZiO1</p>
           <form onSubmit={handleSearch} className="w-full max-w-md">
             <div className="mb-4">
               <label htmlFor="invoiceNumber" className="block text-sm font-medium mb-2 text-black">
