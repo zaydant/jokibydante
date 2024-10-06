@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from '@/components/ui/toaster'
@@ -27,8 +28,13 @@ export default function Hero() {
   }
 
   return (
-    <section className="container mx-auto px-4 py-12 flex flex-col md:flex-row items-center min-h-screen">
-      <div className="w-full md:w-2/3 md:pr-8 mb-8 md:mb-0">
+    <section className="container mx-auto px-4 py-12 flex flex-col md:flex-row items-center min-h-screen overflow-hidden">
+      <motion.div 
+        className="w-full md:w-2/3 md:pr-8 mb-8 md:mb-0"
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">Boost Smarter, Manage Faster</h1>
         <p className="text-gray-600 mb-6 text-lg md:text-xl">
           Power your Mobile Legends boosting service with our all-in-one management mobile app!
@@ -42,9 +48,14 @@ export default function Hero() {
             Learn More
           </Button>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="w-full md:w-1/3 flex justify-center items-center">
+      <motion.div 
+        className="w-full md:w-1/3 flex justify-center items-center"
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      >
         <div className="rounded-xl overflow-hidden mb-4 md:mb-0 w-[270px] h-[600px] relative">
           {images.map((src, index) => (
             <Image
@@ -61,7 +72,7 @@ export default function Hero() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <Toaster />
     </section>
