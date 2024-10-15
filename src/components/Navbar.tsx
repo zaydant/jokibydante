@@ -1,14 +1,16 @@
-'use client'
+"use client";
 
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { HomeIcon, SearchIcon, MenuIcon } from "lucide-react"
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { HomeIcon, SearchIcon, MenuIcon } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function NavBar() {
+  const { user } = useAuth();
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b">
       <div className="container mx-auto w-full md:w-2/3 px-4 h-16 flex items-center justify-between">
@@ -25,7 +27,11 @@ export default function NavBar() {
         </div>
         <div className="hidden md:flex items-center gap-4">
           <SearchBar />
-          <LoginButton />
+          <Button asChild>
+            <Link href={user ? "/admin" : "/login"}>
+              {user ? "Dashboard" : "Login"}
+            </Link>
+          </Button>
         </div>
         <Sheet>
           <SheetTrigger asChild className="md:hidden">
@@ -39,26 +45,44 @@ export default function NavBar() {
               <NavLink href="/" icon={<HomeIcon className="w-4 h-4" />}>
                 Home
               </NavLink>
-              <NavLink href="/invoices" icon={<SearchIcon className="w-4 h-4" />}>
+              <NavLink
+                href="/invoices"
+                icon={<SearchIcon className="w-4 h-4" />}
+              >
                 Transactions
               </NavLink>
               <SearchBar />
-              <LoginButton />
+              <Button asChild>
+                <Link href={user ? "/admin" : "/login"}>
+                  {user ? "Dashboard" : "Login"}
+                </Link>
+              </Button>
             </nav>
           </SheetContent>
         </Sheet>
       </div>
     </header>
-  )
+  );
 }
 
-function NavLink({ href, icon, children }: { href: string; icon: React.ReactNode; children: React.ReactNode }) {
+function NavLink({
+  href,
+  icon,
+  children,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
-    <Link href={href} className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+    <Link
+      href={href}
+      className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+    >
       {icon}
       <span>{children}</span>
     </Link>
-  )
+  );
 }
 
 function SearchBar() {
@@ -71,13 +95,5 @@ function SearchBar() {
         className="pl-8 pr-4 w-full md:w-auto"
       />
     </div>
-  )
-}
-
-function LoginButton() {
-  return (
-    <Button asChild>
-      <Link href="/login">Login</Link>
-    </Button>
-  )
+  );
 }

@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from '@/components/ui/toaster'
+import Link from 'next/link'
 
 export default function Hero() {
   const { toast } = useToast()
@@ -17,7 +18,7 @@ export default function Hero() {
       setCurrentImage((prevImage) => (prevImage + 1) % images.length)
     }, 3000)
     return () => clearInterval(timer)
-  }, [])
+  }, [images.length])
 
   const handleLearnMore = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -46,6 +47,13 @@ export default function Hero() {
             onClick={handleLearnMore}
           >
             Learn More
+          </Button>
+          <Button
+            variant="default"
+            className="bg-black text-white rounded-xl h-11"
+          >
+            <Link href={'/invoices'}>Find Transactions</Link>
+            
           </Button>
         </div>
       </motion.div>
