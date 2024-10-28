@@ -37,11 +37,11 @@ export default function NavBar() {
           <SheetTrigger asChild className="md:hidden">
             <Button variant="outline" size="icon">
               <MenuIcon className="h-4 w-4" />
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only poppins">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left">
-            <nav className="flex flex-col gap-4">
+          <SheetContent side="right">
+            <nav className="flex flex-col gap-4 poppins">
               <NavLink href="/" icon={<HomeIcon className="w-4 h-4" />}>
                 Home
               </NavLink>

@@ -22,7 +22,7 @@ export default function Invoices() {
     <div className="min-h-screen w-full p-4 bg-white flex flex-col poppins">
       <NavBar />
       <div className="flex flex-col w-full items-center justify-center px-4">
-        <div className="w-2/3">
+        <div className="w-full md:w-2/3">
           <h1 className="text-4xl font-bold mb-4 mt-12 text-black">Find Your Order!</h1>
           <p className="mb-4 text-black">Find your order by entering your invoice number below:</p>
           <p className="mb-4 text-black">Enter this id for example: JDTbvae_ZiO1</p>

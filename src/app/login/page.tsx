@@ -102,7 +102,7 @@ export default function LoginPage() {
               </div>
             </CardContent>
             <CardFooter className="flex gap-2">
-              <Button className="w-[50px] p-4 bg-white border-2 text-black hover:bg-slate-200">
+              <Button className="w-[50px] p-4 bg-white border-2 text-black hover:bg-slate-200" asChild>
                 <Link href={'/'}>&lt;</Link>  
               </Button>
               <Button className="w-full" type="submit" disabled={loading}>

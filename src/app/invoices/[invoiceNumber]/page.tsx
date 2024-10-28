@@ -77,7 +77,7 @@ export default function InvoicePage({
                   ).toLocaleDateString()} at ${new Date(
                     invoiceData.createdAt
                   ).toLocaleTimeString()}.`
-                : "Transaction date loading..."}
+                : ""}
             </p>
             <p className="text-lg mb-4 text-black">
               {invoiceData?.updatedAt
@@ -86,7 +86,7 @@ export default function InvoicePage({
                   ).toLocaleDateString()} at ${new Date(
                     invoiceData.updatedAt
                   ).toLocaleTimeString()}.`
-                : "Transaction update date loading..."}
+                : ""}
             </p>
           </div>
           {loading ? (
